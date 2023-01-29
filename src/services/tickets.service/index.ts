@@ -7,13 +7,13 @@ async function getTypes() {
 }
 
 async function getUserByID(userId: number) {
-    const enrollments = await enrollmentRepository.findByUserId(userId);
-    if (!enrollments) throw notFoundError();
+    const checkEnrollments = await enrollmentRepository.findByUserId(userId);
+    if (!checkEnrollments) throw notFoundError();
   
-    const userTicket = await ticketRepository.findTicketByEnrollmentID(enrollments.id);
+    const userTicket = await ticketRepository.findTicketByEnrollmentID(checkEnrollments.id);
     if (!userTicket) throw notFoundError();
   
-    return await ticketRepository.findUniqueWithTicketType(enrollments.id);
+    return await ticketRepository.findUniqueWithTicketType(checkEnrollments.id);
   }
 
 

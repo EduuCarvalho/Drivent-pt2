@@ -29,3 +29,7 @@ export async function getTickets (req: AuthenticatedRequest, res: Response){
       }
 
 }
+
+export async function postTicket(req: AuthenticatedRequest, res: Response){
+    return
+}
