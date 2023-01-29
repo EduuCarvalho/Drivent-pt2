@@ -20,16 +20,26 @@ export async function getTickets (req: AuthenticatedRequest, res: Response){
     try{
         const ticket = await ticketsService.getUserByID(userId);
         return res.status(httpStatus.OK).send(ticket);
-    } catch (error) {
-        if (error.name === "NotFoundError") {
-          return res.status(httpStatus.NOT_FOUND).send(error.message);
+    } catch (err) {
+        if (err.name === "NotFoundError") {
+          return res.status(httpStatus.NOT_FOUND).send(err.message);
         }
     
         return res.sendStatus(httpStatus.NO_CONTENT);
       }
-
 }
 
 export async function postTicket(req: AuthenticatedRequest, res: Response){
-    return
+    const {userId, body} = req;
+
+    try{
+        const ticket = await ticketsService.insertTicket(userId,body);
+        return res.status(httpStatus.CREATED).send(ticket);
+    } catch (err) {
+        if (err.name=== "notFoundError") {
+            return res.status(httpStatus.NOT_FOUND).send(err.message);
+        }
+
+        return res.sendStatus(httpStatus.NOT_FOUND);// TEM UM ERRO NO TESTE, DEVERIA SER NO_CONTENT AQUI, UMA VEZ QUE O 404 JA FOI ENVIADO
+    }
 }

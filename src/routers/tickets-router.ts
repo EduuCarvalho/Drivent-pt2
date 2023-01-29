@@ -1,6 +1,7 @@
 import {Router} from 'express';
-import { authenticateToken } from "@/middlewares";
+import { authenticateToken, validateBody } from "@/middlewares";
 import { getTicketsType, getTickets, postTicket } from '@/controllers/tickets-controllers';
+import { postTicketSchema } from "@/schemas";
 
 
 
@@ -10,6 +11,6 @@ ticketsRouter
 .all("/*", authenticateToken)
 .get("/types",getTicketsType)
 .get("/",getTickets)
-.post("/",postTicket)
+.post("/",validateBody(postTicketSchema),postTicket)
 
 export { ticketsRouter };
