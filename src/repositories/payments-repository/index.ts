@@ -1,13 +1,11 @@
 import { prisma } from "@/config";
 
-
-
 export async function findTicketIdfromPayment(ticketId: number) {
-    return prisma.payment.findFirst({
-        where: {
-            ticketId,
-        },
-    });
+  return prisma.payment.findFirst({
+    where: {
+      ticketId,
+    },
+  });
 }
 
 export type CreatePaymentBody = {
@@ -22,20 +20,19 @@ export type CreatePaymentBody = {
   };
   
 async function createPayment(body: CreatePaymentBody, value: number) {
-    return prisma.payment.create({
-      data: {
-        ticketId: body.ticketId,
-        cardIssuer: body.cardData.issuer,
-        cardLastDigits: body.cardData.number.slice(-4),
-        value,
-      },
-    });
-  }
-  
-
-const paymentRepository = {
-    findTicketIdfromPayment,
-    createPayment
+  return prisma.payment.create({
+    data: {
+      ticketId: body.ticketId,
+      cardIssuer: body.cardData.issuer,
+      cardLastDigits: body.cardData.number.slice(-4),
+      value,
+    },
+  });
 }
+  
+const paymentRepository = {
+  findTicketIdfromPayment,
+  createPayment
+};
 
-export default paymentRepository
+export default paymentRepository;
