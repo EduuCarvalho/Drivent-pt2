@@ -3,3 +3,4 @@ export * from "./authentication-schemas";
 export * from "./enrollments-schemas";
 export * from "./authentication-schemas"
 export * from "./ticket.schemas"
+export * from "./payment.schema"
