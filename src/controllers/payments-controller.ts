@@ -39,7 +39,6 @@ export async function postPayment(req: AuthenticatedRequest , res: Response) {
       if (err.name === "UnauthorizedError") {
         return res.status(httpStatus.UNAUTHORIZED).send(err.message);
       }
-  
-      return res.send("LULULULULU")
+
     }
 }
